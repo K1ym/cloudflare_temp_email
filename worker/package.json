@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "wrangler dev",
     "lint": "eslint src",
-    "deploy": "wrangler deploy --minify",
+    "predeploy": "node scripts/clean_toml.js",
+    "deploy": "node scripts/clean_toml.js && wrangler deploy --minify",
     "start": "wrangler dev",
-    "build": "wrangler deploy --dry-run --outdir dist --minify"
+    "prebuild": "node scripts/clean_toml.js",
+    "build": "node scripts/clean_toml.js && wrangler deploy --dry-run --outdir dist --minify"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20261021.1",
