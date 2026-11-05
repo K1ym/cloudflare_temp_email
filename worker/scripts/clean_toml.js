@@ -11,5 +11,7 @@ if (fs.existsSync(filePath)) {
   const lines = content.split(/\r?\n/).filter(line => !line.trim().startsWith('```'));
   content = lines.join('\n').trim() + '\n';
   fs.writeFileSync(filePath, content, 'utf-8');
-  console.log('[clean_toml] Successfully sanitized wrangler.toml before deployment (' + lines.length + ' lines)');
+  console.log('[clean_toml] Sanitized lines count:', lines.length);
+  const firstLine = lines[0] || '';
+  console.log('[clean_toml] First line char codes:', Array.from(firstLine.slice(0, 30)).map(c => c.charCodeAt(0) + ' (' + c + ')').join(', '));
 }
